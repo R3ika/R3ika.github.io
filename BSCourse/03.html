@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: auto;
+        outline: 1px solid red;
+      }
+      .item {
+        --column-count: 1;
+        width: calc((100% / var(--column-count))-20px);
+        height: 100px;
+        margin: 10px;
+        background-color: #aaa;
+      }
+      @media screen and (min-width: 768px) {
+        .item {
+          --column-count: 2;
+        }
+      }
+      @media screen and (min-width: 1024px) {
+        .box .item {
+          --column-count: 3;
+        }
+      }
+      @media screen and (min-width: 1200px) {
+        .item {
+          --column-count: 4;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+  </body>
+</html>

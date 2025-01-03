@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: auto;
+        outline: 1px solid red;
+      }
+      .item {
+        width: calc((100% / 3)-20px);
+        /* 100%除去欄位數量，再扣掉2邊margin的空間 */
+        height: 100px;
+        margin: 10px;
+        background-color: #aaa;
+      }
+      @media screen and (min-width: 768px) {
+        .item {
+          width: calc(100% / 2-20px);
+        }
+        /* 
+        @media裝置類型 and (規則條件){
+        符合裝置類型與規則條件會執行的CSS */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item"></div>
+      <div class="item"></div>
+      <div class="item"></div>
+    </div>
+  </body>
+</html>

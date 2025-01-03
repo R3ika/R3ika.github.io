@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!-- 自適應版面設計 -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        box-sizing: border-box;
+      }
+      nav {
+        width: 100%;
+        height: 80px;
+        background-color: #aaa;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        position: relative;
+        padding: 10px;
+      }
+      nav .logo {
+        width: 200px;
+        height: 50px;
+      }
+      nav .logo img {
+        width: 100%;
+        height: 100%;
+        vertical-align: top;
+      }
+      .hb {
+        height: 25px;
+        width: 25px;
+        line-height: 25px;
+        background-color: orange;
+      }
+      nav ul {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #f00; /* display: none;        padding: 10px; */
+      }
+      nav ul li {
+        padding: 10px;
+      }
+      nav ul li + li {
+        border-top: 1px solid black;
+      }
+      @media screen and (min-width: 767px) {
+        .hb {
+          width: 25px;
+          height: 25px;
+          line-height: 25px;
+          background-color: #fa0;
+          padding: 3px;
+        }
+        .hb span {
+          display: block;
+          width: 20px;
+          height: 3px;
+          background-color: #000;
+          border-radius: 5px;
+        }
+        nav ul {
+          position: absolute
+          top: 100%;
+          left:-100% ;
+          width: 90%;
+          opacity: 0;
+          transition: opacity: 1s;
+        }
+        .hb{
+
+        }
+
+        .hb span{
+            display: block;
+            width: 20px;
+            height: 3px;
+            border-radius: 5px;
+            transition: all .5s;
+        }
+        nav .main-menu li .cicon0arrow{
+            width:25px;
+            height: 25px;
+            line-height: 25px;
+        }
+        #hb-input:checked+nav .hb span:nth-child()
+        nav ul li {
+          display: block;
+          width: 25px;
+          height: 25px;
+          background-color: #fa0;
+          padding: 3px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+        }
+        #hb-input:checked+nav .hb span:nth-child(1){
+            transform:  rotate(45deg) translate(5px,7px);
+        }
+        #hb-input:checked+nav .hb span:nth-child(2){
+            opacity: 0;
+        }#hb-input:checked+nav .hb span:nth-child(3){
+            transform:  rotate(-45deg) translate(4px,-6px);
+        }
+        nav .main-menu li>a{
+            flex-grow:1;
+        }
+        nav .sub-menu{
+            display:none;
+            width: 100%;
+        }
+        .sub-menu li{
+            display: none;
+            width: 100px;
+        }
+        .sub-menu-input:checked.sub-menu{
+            display:block;
+        }
+ .sub-menu-input:checked~.icon-arrow{
+    scale
+ }   
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+        <ul class="main-menu"></ul>
+        <li>
+            <input type = "checkbox"
+      <div class="checkbox"><img src="https://fakeimg.pl/100x50/200" /></div>
+      <div class="hb">|||</div>
+      <ul>
+        <li><a href="#">link</a></li>
+        <li><a href="#">link</a></li>
+        <li><a href="#">link</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Davinci Code</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+        font-size: 1.2em;
+      }
+      .input,
+      .rangeBox {
+        display: flex;
+        margin: auto;
+        flex-wrap: wrap;
+        width: 350px;
+        height: 50px;
+        border: 1px solid;
+        border-radius: 5px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+      .rangeBox {
+        margin-bottom: -1px;
+      }
+      .buttons {
+        display: flex;
+        width: 350px;
+        height: 400px;
+        margin: auto;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+      .btn {
+        width: 33.3%;
+        height: 25%;
+      }
+      .gameStart {
+        display: flex;
+        margin: auto;
+        flex-wrap: wrap;
+        width: 350px;
+        height: 50px;
+        border: 1px solid;
+        border-radius: 5px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="DavinciCode">
+      <!-- 顯示&range長條 -->
+      <div class="rangeBox"></div>
+      <!-- data-display="rangeBox" -->
+      <!-- <input type="text" class="input" /> -->
+      <div class="input"></div>
+
+      <div class="buttons">
+        <!-- 數字鍵盤 -->
+        <button class="btn" data-num="1">一</button>
+        <button class="btn" data-num="2">二</button>
+        <button class="btn" data-num="3">三</button>
+        <button class="btn" data-num="4">四</button>
+        <button class="btn" data-num="5">五</button>
+        <button class="btn" data-num="6">六</button>
+        <button class="btn" data-num="7">七</button>
+        <button class="btn" data-num="8">八</button>
+        <button class="btn" data-num="9">九</button>
+        <button class="btn" data-num="clear">✗</button>
+        <button class="btn" data-num="0">零</button>
+        <button class="btn" data-num="enter">✓</button>
+      </div>
+
+      <button class="gameStart" data-btn="gameStart">GameStart</button>
+    </div>
+    <script>
+      //declaration
+      let inputNum = 0; //顯示給使用者的數字
+      let n = 0; //給raddbuttonNum()
+      let minNum = 0; //最小數字
+      let maxNum = 100; //最大數字
+      let answer = 0;
+      // let rangeNum = 0;
+
+      //rangeBox & input
+      const input = document.querySelector(".input");
+      const rangeBox = document.querySelector(".rangeBox");
+
+      //button [GameStart & enter & clear]//
+
+      //GameStart
+      const ansbtn = document.querySelector('.gameStart[data-btn="gameStart"]');
+      ansbtn.addEventListener("click", () => {
+        minNum = 0;
+        maxNum = 100;
+        answer = getRandomNum(0, 100);
+        console.log(`還敢偷看答案啊？`);
+        console.log(`好辣，答案是 ${answer}`);
+        rangeBox.textContent = `${minNum} ~ ${maxNum}`;
+        input.textContent = `按按鈕吧～`;
+      });
+
+      //enter
+      const enter = document.querySelector(`.btn[data-num="enter"]`);
+      enter.addEventListener("click", () => {
+        // while (inputNum != answer) {
+        if (inputNum === answer) {
+          input.textContent = `恭喜猜對了！`;
+          n = 0;
+        } else {
+          if (inputNum <= minNum) {
+            rangeBox.textContent = `${minNum} ~ ${maxNum}`;
+            input.textContent = `數字要在範圍內呦`;
+          } else if (inputNum >= maxNum) {
+            rangeBox.textContent = `${minNum} ~ ${maxNum}`;
+            input.textContent = `數字要在範圍內呦`;
+          } else {
+            if (inputNum > answer) {
+              maxNum = inputNum;
+              rangeBox.textContent = `${minNum} ~ ${maxNum}`;
+              input.textContent = "";
+            } else if (inputNum < answer) {
+              minNum = inputNum;
+              rangeBox.textContent = `${minNum} ~ ${maxNum}`;
+              input.textContent = "";
+            }
+          }
+          n = 0;
+        }
+      });
+
+      //clear
+      const clear = document.querySelector('.btn[data-num = "clear"]');
+      clear.addEventListener("click", () => {
+        input.textContent = "";
+        n = 0;
+      });
+      //button [0~9]//
+
+      const btn1 = document.querySelector('.btn[data-num="1"]');
+      const btn2 = document.querySelector('.btn[data-num="2"]');
+      const btn3 = document.querySelector('.btn[data-num="3"]');
+      const btn4 = document.querySelector('.btn[data-num="4"]');
+      const btn5 = document.querySelector('.btn[data-num="5"]');
+      const btn6 = document.querySelector('.btn[data-num="6"]');
+      const btn7 = document.querySelector('.btn[data-num="7"]');
+      const btn8 = document.querySelector('.btn[data-num="8"]');
+      const btn9 = document.querySelector('.btn[data-num="9"]');
+      const btn0 = document.querySelector('.btn[data-num="0"]');
+
+      btn1.addEventListener("click", () => {
+        addbuttonNum(btn1.dataset.num);
+      });
+      btn2.addEventListener("click", () => {
+        addbuttonNum(btn2.dataset.num);
+      });
+      btn3.addEventListener("click", () => {
+        addbuttonNum(btn3.dataset.num);
+      });
+      btn4.addEventListener("click", () => {
+        addbuttonNum(btn4.dataset.num);
+      });
+      btn5.addEventListener("click", () => {
+        addbuttonNum(btn5.dataset.num);
+      });
+      btn6.addEventListener("click", () => {
+        addbuttonNum(btn6.dataset.num);
+      });
+      btn7.addEventListener("click", () => {
+        addbuttonNum(btn7.dataset.num);
+      });
+      btn8.addEventListener("click", () => {
+        addbuttonNum(btn8.dataset.num);
+      });
+      btn9.addEventListener("click", () => {
+        addbuttonNum(btn9.dataset.num);
+      });
+      btn0.addEventListener("click", () => {
+        addbuttonNum(btn0.dataset.num);
+      });
+
+      //functions [getRandomNum & addbuttonNum]//
+      function getRandomNum(min, max) {
+        //隨機答案
+        const minCeiled = Math.ceil(min);
+        const maxFloored = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+      // let answer = getRandomNum(0, 100);
+
+      function addbuttonNum(btnNum) {
+        //按鈕數字
+        n = n + btnNum;
+        inputNum = Number(n);
+        input.textContent = inputNum;
+        // console.log(inputNum);
+      }
+    </script>
+  </body>
+</html>
