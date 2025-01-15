@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xAxB</title>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .Game {
+        width: 100%;
+        height: 500px;
+        display: flex;
+        /* justify-content: center; */
+        align-items: center;
+        flex-direction: column;
+      }
+      .xAxB {
+        width: 75%;
+        height: 40px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+      .inputBox {
+        display: flex;
+        width: 75%;
+        align-items: center;
+        justify-content: center;
+      }
+      .gamestart {
+        width: 75%;
+        height: 30px;
+      }
+      .btns {
+        width: 75%;
+        height: 40px;
+        display: flex;
+        justify-content: space-around;
+      }
+      .clear,
+      .answer,
+      .enter {
+        width: 33.3%;
+      }
+      .output {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 75%;
+      }
+      .output div {
+        flex-direction: column;
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="Game">
+      <div class="xAxB">1A2B猜數字遊戲</div>
+      <button class="gamestart">GameStart</button>
+      <input type="text" class="inputBox" placeholder="請輸入4位不重複數字" />
+      <div class="btns">
+        <button class="clear">Clear</button
+        ><button class="answer">Answer</button
+        ><button class="enter">Enter</button>
+      </div>
+      <div class="output"></div>
+    </div>
+
+    <script>
+      //start + randomNum
+      const gamestart = document.querySelector(".gamestart");
+      gamestart.addEventListener("click", () => start());
+
+      let answerNum = "";
+      function start() {
+        answerNum = "";
+        const randomNums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+        for (let i = 0; i < 4; i += 1) {
+          const numIndex = Math.floor(Math.random() * randomNums.length);
+          answerNum += randomNums[numIndex];
+          randomNums.splice(numIndex, 1);
+        }
+        console.log(answerNum);
+        input.value = "";
+      }
+
+      //input & enter & log
+      let inputNum = "";
+      const input = document.querySelector(".inputBox");
+      const enter = document.querySelector(".enter");
+      const output = document.querySelector(".output");
+      input.addEventListener("keydown", (ek) => {
+        if (ek.key === "Enter") {
+          inputValueCheck();
+          input.value = "";
+        }
+      });
+      enter.addEventListener("click", (el) => {
+        inputValueCheck();
+        input.value = "";
+      });
+
+      let reverse = false;
+      function inputValueCheck() {
+        inputNum = input.value;
+        if (inputNum.length !== 4) {
+          output.innerHTML += `<div>請輸入4位數字</div>`;
+        } else {
+          for (let n = 0; n < inputNum.length; n += 1) {
+            for (let m = n + 1; m < inputNum.length; m += 1) {
+              if (inputNum[n] === inputNum[m]) {
+                reverse = true;
+                break;
+              }
+            }
+          }
+          if (reverse) {
+            output.innerHTML += "<div>重複了喔</div>";
+            reverse = false;
+          } else xAxBCheck();
+        }
+      }
+      // 判斷幾A幾B
+      let countA = 0;
+      let countB = 0;
+      function xAxBCheck() {
+        countA = 0;
+        countB = 0;
+        for (let a = 0; a < 4; a += 1) {
+          for (let b = 0; b < 4; b += 1) {
+            if (answerNum[a] === inputNum[b]) {
+              if (a === b) countA += 1;
+              else countB += 1;
+            }
+          }
+        }
+        if (countA === 4) {
+          output.innerHTML += `<div>恭喜成功！</div>`;
+        }
+
+        output.innerHTML += `<div>${countA}A${countB}B: ${inputNum}`;
+      }
+
+      const answer = document.querySelector(".answer");
+      answer.addEventListener("click", () => {
+        output.innerHTML += `<div>${answerNum}</div>`;
+      });
+
+      //clear
+      const clear = document.querySelector(".clear");
+      clear.addEventListener("click", () => {
+        input.value = "";
+      });
+    </script>
+  </body>
+</html>
